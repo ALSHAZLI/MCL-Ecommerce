@@ -22,7 +22,9 @@ app.use(session({
     cookie: {
         maxAge: 1000 * 60 * 60 * 24 // 86400000 1 day
     }
+    
 }));
+
 
 // Enable body parser post data
 app.use(bodyParser.json());
@@ -40,6 +42,10 @@ app.use(passport.session());
 
 // init all web routes
 initWebRoutes(app);
+
+// app.use(function (req, res, next) {
+//     res.status(404).send("Sorry can't find that!");
+//   });
 
 let port = process.env.PORT || 8080;
 app.listen(port, () => console.log(`Building a login system with NodeJS is running on port ${port}!`));

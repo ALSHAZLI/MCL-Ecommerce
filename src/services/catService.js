@@ -40,68 +40,38 @@ let app = express();
 
 
 
-let createNewUser = (data) => {
+let createNewCat = (data) => {
     return new Promise(async (resolve, reject) => {
-        // check email is exist or not
-        let isEmailExist = await checkExistEmail(data.phone);
-
-
-        if (isEmailExist) {
-            reject(`This email "${data.phone}" has already exist. Please choose an other Phone`);
-            
-           
-            
-        } else {
+        
             // hash password
             let salt = bcrypt.genSaltSync(10);
-            let userItem = {
-                fullname: data.fullname,
-                phone: data.phone,
-                password: bcrypt.hashSync(data.password, salt),
+            let catItem = {
+                name: data.name,
+                image: data.image,
+                
             };
 
             //create a new account
             DBConnection.query(
-                ' INSERT INTO users set ? ', userItem,
+                ' INSERT INTO cat set ? ', catItem,
                 function(err, rows) {
                     if (err) {
                         reject(false)
-                        resolve("Create a new user Fulier ***********");
+                        resolve("Create a new catItem Fulier ***********");
                         console.log(err);
                         
                         
                     }
-                    resolve("Create a new user successful");
-                    console.log("Create a new user successful");
+                    resolve("Create a new Ct successful");
+                    console.log("Create a new Ct successful");
                 }
             );
-        }
+        
     });
 };
 
-let checkExistEmail = (phone) => {
-    return new Promise( (resolve, reject) => {
-        try {
-            DBConnection.query(
-                ' SELECT * FROM `users` WHERE `phone` = ?  ', phone,
-                function(err, rows) {
-                    if (err) {
-                        reject(err)
-                        console.log(err);
-                    }
-                    if (rows.length > 0) {
-                        resolve(true)
-                    } else {
-                        resolve(false)
-                    }
-                }
-            );
-        } catch (err) {
-            reject(err);
-        }
-    });
-};
+
 module.exports = {
-    createNewUser: createNewUser,
-    checkExistEmail: checkExistEmail
+    createNewCat: createNewCat,
+    
 };

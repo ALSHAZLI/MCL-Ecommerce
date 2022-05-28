@@ -1,6 +1,7 @@
 const express = require('express');
 const loginController = require('../controllers/loginController');
-const homeController = require('../controllers/homePageController');
+const catController = require('../controllers/catController');
+
 
 const RegisterController = require('../controllers/registerController');
 import homePageController from "../controllers/homePageController";
@@ -23,6 +24,7 @@ let initWebRoutes = (app) => {
         successFlash: true,
         failureFlash: true
     }));
+    router.post("/cat",catController.createNewCat);
     router.get("/register",RegisterController.getPageRegister);
     router.post("/register",
          RegisterController.createNewUser

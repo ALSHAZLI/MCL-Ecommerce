@@ -1,5 +1,6 @@
 import DBConnection from "../configs/DBConnection";
 import bcrypt from "bcryptjs";
+const jwt = require("jsonwebtoken");
 
 let handleLogin = (phone, password) => {
     return new Promise(async (resolve, reject) => {
@@ -10,11 +11,16 @@ let handleLogin = (phone, password) => {
             await bcrypt.compare(password, user.password).then((isMatch) => {
                 if (isMatch) {
                     resolve(true);
+                    
                 } else {
                     reject(`The password that you've entered is incorrect`);
                 }
             });
         } else {
+            res.status(401).json({
+                message:"Fillera 222222 !!!!",
+                
+            })
             reject(`This user email "${phone}" doesn't exist`);
             console.log(`This user email "${phone}" doesn't exist`);
         }
@@ -23,22 +29,29 @@ let handleLogin = (phone, password) => {
 
 
 let findUserByEmail = (phone) => {
-    return new Promise((resolve, reject) => {
+    return new Promise( async (resolve, reject)  => {
+        
         try {
             DBConnection.query(
                 ' SELECT * FROM `users` WHERE `phone` = ?  ', phone,
                 function(err, rows) {
                     if (err) {
                         reject(err)
-                        console.log(err);
+                        console.log(`the is err ${err}`);
+                        
+                        
                     }
-                    let user = rows[0];
-                    resolve(user);
-                    console.log(user);
+                    let user = rows[0]
+                    resolve(user)
+                    
+                       
+                    
+                    // console.log('email was founded @@@@');
                 }
             );
         } catch (err) {
             reject(err);
+            console.log(` gyeghdgchd ${err} vvvvvvvvv`)
         }
     });
 };

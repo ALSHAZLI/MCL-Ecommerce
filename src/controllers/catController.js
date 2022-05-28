@@ -1,16 +1,10 @@
-import registerService from "./../services/registerService";
+import catService from "./../services/catService";
 import { validationResult } from "express-validator";
 
-let getPageRegister = (req, res) => {
-  return res.render("register.ejs", {
-    errors: req.flash("errors"),
-  });
-};
-let conn = async function (req,res,next){
-  console.log('conn function dont cear');
-}
 
-let createNewUser = async function (req, res,next) {
+
+
+let createNewCat = async function (req, res,next) {
   //validate required fields
   let errorsArr = [];
   let validationErrors = validationResult(req);
@@ -20,23 +14,21 @@ let createNewUser = async function (req, res,next) {
       errorsArr.push(item.msg);
     });
     req.flash("errors", errorsArr);
-    return res.redirect("/register");
+    // return res.send("errorrrrrrrrr");
   }
   //create a new user
-    let newUser = {
-        fullname: req.body.fullName,
-        phone: req.body.phone,
-        password: req.body.password,
+    let catItem = {
+        name: req.body.name,
+        image: req.body.image,
+        
     };
     try {
-        await registerService.createNewUser(newUser);
-         
-        return res.redirect("/login");
+        await catService.createNewCat(catItem);
+        console.log(catItem);
+        return res.send(catItem);
+       
     
     } catch (err) { 
-      
-    
-      
       
       // if(err){      
       // return res.redirect("/register");
@@ -51,13 +43,12 @@ let createNewUser = async function (req, res,next) {
       // **********************************************************
       
         req.flash("errors", err);
-        return res.redirect("/register");
+        return console.log(err);
     
     }
 };
 module.exports = {
-  getPageRegister: getPageRegister,
-  createNewUser: createNewUser,
+    createNewCat: createNewCat,
 };
 
 // import registerService from "./../services/registerService";

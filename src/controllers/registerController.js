@@ -4,10 +4,10 @@ import { validationResult } from "express-validator";
 let getPageRegister = (req, res) => {
   return res.render("register.ejs", {
     errors: req.flash("errors"),
-  });
+  });   
 };
 let conn = async function (req,res,next){
-  console.log('conn function dont cear');
+  console.log('conn function nnnnnn dont cear');
 }
 
 let createNewUser = async function (req, res,next) {

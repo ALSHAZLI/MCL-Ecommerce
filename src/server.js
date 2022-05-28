@@ -12,7 +12,7 @@ import passport from "passport";
 let app = express();
 
 //use cookie parser
-app.use(cookieParser('secret'));
+// app.use(cookieParser('secret'));
 
 //config session
 app.use(session({
@@ -37,8 +37,8 @@ configViewEngine(app);
 app.use(connectFlash());
 
 //Config passport middleware
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize()); *******************
+// app.use(passport.session()); ***********************
 
 // init all web routes
 initWebRoutes(app);

@@ -48,6 +48,7 @@ let createNewUser = (data) => {
 
         if (isEmailExist) {
             reject(`This email "${data.phone}" has already exist. Please choose an other Phone`);
+            console.log(`This email "${data.phone}" has already exist. Please choose an other Phone`);
             
            
             

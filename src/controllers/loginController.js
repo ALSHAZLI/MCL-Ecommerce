@@ -35,16 +35,16 @@ let handleLogin = async (req, res) => {
 
     try {
         await loginService.handleLogin(req.body.phone, req.body.password);
-        var token = jwt.sign({
-            phone : user.phone,
-            Userid : user.id
-        },'secret',function (error,token){
-            res.status(201).json({
-                message:"sucssss !!!!",
-                token : token
-            })
-            }
-        )
+        // var token = jwt.sign({
+        //     phone : user.phone,
+        //     Userid : user.id
+        // },'secret',function (error,token){
+        //     res.status(201).json({
+        //         message:"sucssss !!!!",
+        //         token : token
+        //     })
+        //     }
+        //)
         return res.redirect("/");
     } catch (err) {
         // console.log("balablabalbalablla"); 
